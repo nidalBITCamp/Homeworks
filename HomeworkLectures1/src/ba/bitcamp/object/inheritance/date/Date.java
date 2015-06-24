@@ -25,7 +25,7 @@ public class Date {
 	 */
 	public Date(int day, int month, int year) {
 
-		if (year < 1 || month < 1 || month > 12 || day < 1) {
+		if (year < 1 || month < 1 || month > 12 || day < 1 || day > 31) {
 			System.out.println("Wrong input");
 		}
 		if (day > 31
@@ -35,6 +35,9 @@ public class Date {
 		} else if (day > 30
 				&& (month == 4 || month == 6 || month == 9 || month == 11)) {
 			System.out.println(" Wrong input of day  for entered month ");
+
+		} else if ((year % 4 == 0 && year % 400 == 0) && day > 29) {
+			System.out.println(" Wrong input of day for entered month");
 
 		} else if (month == 2 && day > 28) {
 			System.out.println(" Wrong input of day  for entered month ");
@@ -88,12 +91,13 @@ public class Date {
 	 * 
 	 * @param month
 	 *            - integer month
+	 * @throws Exception
 	 */
-	public void setMonth(int month) {
+	public void setMonth(int month) throws Exception {
 		if (month > 0 && month <= 12) {
 			this.month = month;
 		} else {
-			System.out.println("Month is out of range");
+			throw new Exception("Month is out of range");
 
 		}
 	}
@@ -103,22 +107,27 @@ public class Date {
 	 * 
 	 * @param day
 	 *            - integer day
+	 * @throws Exception
 	 */
-	public void setDay(int day) {
+	public void setDay(int day) throws Exception {
 
 		if (year < 1 || month < 1 || month > 12 || day < 1) {
-			System.out.println("Wrong input");
-		}
-		if (day > 31
+			throw new Exception("Wrong input");
+		} else if (day > 31
 				&& (month == 1 || month == 3 || month == 5 || month == 7
 						|| month == 8 || month == 10 || month == 12)) {
-			System.out.println(" Wrong input of day  for entered month");
+			throw new Exception(" Wrong input of day  for entered month");
+
 		} else if (day > 30
 				&& (month == 4 || month == 6 || month == 9 || month == 11)) {
-			System.out.println(" Wrong input of day  for entered month ");
+			throw new Exception(" Wrong input of day  for entered month ");
+
+		} else if ((year % 4 == 0 && year % 400 == 0) && day > 29) {
+			throw new Exception(" Wrong input of day for entered month");
 
 		} else if (month == 2 && day > 28) {
-			System.out.println(" Wrong input of day  for entered month ");
+			throw new Exception(" Wrong input of day  for entered month ");
+
 		}
 
 		this.day = day;
@@ -129,30 +138,29 @@ public class Date {
 	 * Method to add one day
 	 * 
 	 * @param
+	 * @throws Exception
 	 */
-	public void dayPassed() {
+	public void dayPassed() throws Exception {
+		try {
+			setDay(day + 1);
 
-		this.day += 1;
-
-		if (day == 32) {
-
-			this.day = 1;
-			this.month += 1;
-			if (month > 12) {
-				month = 1;
-				year += 1;
-			}
+		} catch (Exception e) {
+			setDay(1);
+			monthPasse();
 		}
-
 	}
 
 	/**
 	 * Method to add one month
+	 * 
+	 * @throws Exception
 	 */
-	public void monthPasse() {
+	public void monthPasse() throws Exception {
 
-		this.month += 1;
-		if (month == 13) {
+		try {
+			setMonth(month + 1);
+		} catch (Exception e) {
+			setDay(day);
 			this.month = 1;
 			this.year += 1;
 		}

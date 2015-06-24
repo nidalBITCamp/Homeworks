@@ -15,7 +15,7 @@ public class Bookstore {
 
 	// Attributes of bookstore
 	private String name;
-	private Book[] book;
+	private Book[] books;
 
 	/**
 	 * Declaration constructor for bookstore
@@ -28,7 +28,7 @@ public class Bookstore {
 	public Bookstore(String name, Book[] book) {
 		super();
 		this.name = name;
-		this.book = book;
+		this.books = book;
 
 	}
 
@@ -41,11 +41,11 @@ public class Bookstore {
 	}
 
 	public Book[] getBook() {
-		return book;
+		return books;
 	}
 
 	public void setBook(Book[] book) {
-		this.book = book;
+		this.books = book;
 	}
 
 	/**
@@ -77,14 +77,14 @@ public class Bookstore {
 			System.out.println("Enter name of book for sale");
 			String s = input.nextLine();
 
-			for (int i = 0; i < book.length; i++) {
+			for (int i = 0; i < books.length; i++) {
 
-				if (book[i].getName().equals(s)) {
+				if (books[i].getName().equals(s)) {
 
-					if (book[i].getStatus() != Book.NULL_BOOK) {
-						book[i].setStatus(book[i].getStatus() - 1);
+					if (books[i].getStatus() != Book.NULL_BOOK) {
+						books[i].setStatus(books[i].getStatus() - 1);
 						System.out.println("One book is sold. We have "
-								+ book[i].getStatus() + " more books");
+								+ books[i].getStatus() + " more books");
 						break;
 					} else {
 						System.out.println("No more book in the store");
@@ -94,7 +94,7 @@ public class Bookstore {
 				}
 				counter++;
 			}
-			if (counter == book.length) {
+			if (counter == books.length) {
 				System.out.println("Wrong name of book");
 			}
 			try {
@@ -117,17 +117,17 @@ public class Bookstore {
 		String a = input.nextLine();
 		String l = "";
 		int counter = 0;
-		for (int i = 0; i < book.length; i++) {
+		for (int i = 0; i < books.length; i++) {
 
-			if (book[i].getAuthor().getName().equals(a)) {
-				l += (book[i].getName()) + " ,";
+			if (books[i].getAuthor().getName().equals(a)) {
+				l += (books[i].getName()) + " ,";
 			} else {
 				counter++;
 
 			}
 
 		}
-		if (counter == book.length) {
+		if (counter == books.length) {
 			System.out.println("No book of the imputed author");
 		} else {
 			System.out.println(l);
@@ -141,8 +141,8 @@ public class Bookstore {
 	public String toString() {
 		String l = "";
 		l += "Bookstore name is " + name + ",\n Book for sale is ";
-		for (int i = 0; i < book.length; i++) {
-			l += " \n  " + book[i].getName() + ". ";
+		for (int i = 0; i < books.length; i++) {
+			l += " \n  " + books[i].getName() + ". ";
 		}
 		return l;
 	}

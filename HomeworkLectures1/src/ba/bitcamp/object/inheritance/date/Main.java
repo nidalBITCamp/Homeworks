@@ -2,7 +2,7 @@ package ba.bitcamp.object.inheritance.date;
 
 public class Main {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 
 		// Declaration new date with all attributes
 		Date d1 = new Date(30, 22, 2001);
@@ -17,8 +17,8 @@ public class Main {
 		System.out.println(d3);
 
 		// Declaration new date with set method
-		d2.setDay(5);
-		d2.setMonth(18);
+		d2.setMonth(2);
+		d2.setDay(28);
 		d2.setYear(2001);
 		System.out.println(d2);
 
