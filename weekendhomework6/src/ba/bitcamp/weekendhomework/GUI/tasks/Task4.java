@@ -3,9 +3,11 @@ package ba.bitcamp.weekendhomework.GUI.tasks;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 public class Task4 extends JFrame {
 
@@ -17,7 +19,7 @@ public class Task4 extends JFrame {
 	public int num;
 	private String line = "";
 	private String[] characters = { "A", "B", "C", "D", "E", "F", "K", "L",
-			"M", "N", "U", "V", "Z" };
+			"M", "N", "U", "V", "Z", " Y"};
 
 	private JButton button1 = new JButton(" > ");
 	private JButton button2 = new JButton(" < ");
@@ -56,24 +58,36 @@ public class Task4 extends JFrame {
 		public void actionPerformed(ActionEvent e) {
 
 			if (e.getSource() == button1) {
-				num = text.getText().indexOf("_");
-				line = text.getText().substring(0, num)
-						+ text.getText().substring(num + 1, num + 2)
-						+ "_"
-						+ text.getText().substring(num + 2,
-								text.getText().length());
-				text.setText(line);
+
+				try {
+
+					num = text.getText().indexOf("_");
+					line = text.getText().substring(0, num)
+							+ text.getText().substring(num + 1, num + 2)
+							+ "_"
+							+ text.getText().substring(num + 2,
+									text.getText().length());
+					text.setText(line);
+				} catch (StringIndexOutOfBoundsException t) {
+					JOptionPane.showMessageDialog(null,
+							"String is empty, insert character");
+				}
 
 			}
 			if (e.getSource() == button2) {
+				try {
+					num = text.getText().indexOf("_");
+					line = text.getText().substring(0, num - 1)
+							+ "_"
+							+ text.getText().substring(num - 1, num)
+							+ text.getText().substring(num + 1,
+									text.getText().length());
+					text.setText(line);
+				} catch (StringIndexOutOfBoundsException t) {
+					JOptionPane.showMessageDialog(null,
+							"String is empty, insert character");
+				}
 
-				num = text.getText().indexOf("_");
-				line = text.getText().substring(0, num - 1)
-						+ "_"
-						+ text.getText().substring(num - 1, num)
-						+ text.getText().substring(num + 1,
-								text.getText().length());
-				text.setText(line);
 			}
 			if (e.getSource() == button4) {
 				button4.setText(characters[(int) (Math.random() * characters.length)]);
