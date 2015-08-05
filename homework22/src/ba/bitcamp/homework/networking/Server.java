@@ -60,11 +60,9 @@ public class Server {
 					writer.write(line);
 					writer.newLine();
 					writer.flush();
-					line = " ";
 
-				} else {
-					line = " ";
 				}
+
 			}
 
 		} catch (IOException e) {

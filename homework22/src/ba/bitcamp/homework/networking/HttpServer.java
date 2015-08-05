@@ -13,25 +13,26 @@ import java.net.Socket;
 /**
  * This class present http server connected to http port
  * 
- * @author Niddal
+ * @author Niddal.Salkic
  *
  */
 public class HttpServer {
 
 	private static final int HTTP_PORT = 3636;
 
-	@SuppressWarnings("resource")
 	public static void main(String[] args) {
 
 		ServerSocket http;
 		try {
+
 			http = new ServerSocket(HTTP_PORT);
 			System.out.println("Server is made");
 
 			while (true) {
+
 				Socket client = http.accept();
-				System.out.println("Client: "
-						+ client.getLocalAddress());
+				System.out.println("Client: " + client.getLocalAddress());
+
 				BufferedWriter clientWriter = new BufferedWriter(
 						new OutputStreamWriter(client.getOutputStream()));
 				BufferedReader clientReader = new BufferedReader(
@@ -40,6 +41,7 @@ public class HttpServer {
 				BufferedReader fileReader = null;
 				String htmlDoc = "";
 				boolean printIps = true;
+
 				try {
 					String fromClient = clientReader.readLine();
 					String[] wantedAddress = fromClient.split(" ");
@@ -53,7 +55,7 @@ public class HttpServer {
 					}
 
 					fileReader = new BufferedReader(new FileReader(new File(
-						address)));
+							address)));
 
 				} catch (NullPointerException ex) {
 					continue;
@@ -62,18 +64,22 @@ public class HttpServer {
 					htmlDoc += fileReader.readLine();
 				}
 
-				BufferedReader fileRead = new BufferedReader(new FileReader(
-						"info.txt"));
 				if (printIps) {
-					while (fileRead.ready()) {
-						String line = fileRead.readLine();
+
+					@SuppressWarnings("resource")
+					BufferedReader reader = new BufferedReader(new FileReader(
+							"info.txt"));
+					while (reader.ready()) {
+						String line = reader.readLine();
+						System.out.println(line);
 						String[] s = line.split(" ");
-						htmlDoc += "\n<a href=" + s[0] + " target="+ "_blank >" + s[0] +"</a>"
-								
+						htmlDoc += "<a href=" + s[0] + " target=" + "_blank >"
+								+ s[1] + "</a>"
+
 								+ "<br>\n";
 					}
 				}
-				fileRead.close();
+				fileReader.close();
 
 				htmlDoc += "</p></body></html>";
 				clientWriter.write(htmlDoc);

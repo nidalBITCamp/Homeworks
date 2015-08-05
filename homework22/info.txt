@@ -1,2 +1,3 @@
-http://google.ba google
-http://klix.ba klix
+https://google.ba google
+https://google.ba google
+https://google.ba google

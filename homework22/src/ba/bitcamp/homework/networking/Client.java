@@ -37,11 +37,12 @@ public class Client {
 			}
 
 		} catch (UnknownHostException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			
+			System.out.println("Something went wrong");
+			
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			
+			System.out.println("Something went wrong");
 		}
 
 	}
