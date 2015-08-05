@@ -45,11 +45,20 @@ public class ChatUtility {
 	 */
 	public static String openURL(String address) {
 
+		String fullAddress;
+		if (address.contains("http://")) {
+			fullAddress = address;
+
+		} else {
+
+			fullAddress = "http://" + address;
+		}
+
 		try {
 			Desktop desktop = Desktop.getDesktop();
-			URI oURL = new URI("http://" + address);
+			URI oURL = new URI(fullAddress);
 			desktop.browse(oURL);
-			return address + " is opened";
+			return fullAddress + " is opened";
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -109,12 +118,17 @@ public class ChatUtility {
 	public static String listDirectory(String address) {
 		String path = "";
 		File directory = new File(address);
-		File[] contents = directory.listFiles();
-		for (File f : contents) {
-			path += (f.getAbsolutePath() + "\n");
-		}
+		if (directory.exists()) {
+			File[] contents = directory.listFiles();
+			for (File f : contents) {
+				path += (f.getAbsolutePath() + "\n");
+			}
+			return path;
 
-		return path;
+		} else {
+
+			return " Directory dont exist";
+		}
 	}
 
 	/**
@@ -125,7 +139,6 @@ public class ChatUtility {
 	 */
 	public static String function(String line) {
 
-		
 		String command = getCommand(line);
 		String address = getAddress(line);
 

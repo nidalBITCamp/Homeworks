@@ -34,10 +34,10 @@ public class Client extends JFrame {
 
 	// Declaration new swing object for this window
 	private JPanel input = new JPanel(new FlowLayout(FlowLayout.TRAILING));
-	private JTextArea history = new JTextArea();
-	private JTextField chat = new JTextField();
 	private JButton send = new JButton("SEND");
-	private Socket client = null;
+	private static JTextArea history = new JTextArea();
+	private static JTextField chat = new JTextField();
+	private static Socket client = null;
 
 	public Client() throws UnknownHostException, IOException {
 
@@ -46,30 +46,8 @@ public class Client extends JFrame {
 
 		// Add action listener to send button
 		send.setSize(getMinimumSize());
-		send.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				try {
-
-					
-					BufferedWriter writer = new BufferedWriter(
-							new OutputStreamWriter(client.getOutputStream()));
-					writer.write(chat.getText());
-					writer.newLine();
-					writer.flush();
-
-					history.append("Client: " + chat.getText() + "\n");
-
-				} catch (IOException e1) {
-
-					e1.printStackTrace();
-				}
-
-				chat.setText("");
-
-			}
-		});
+		send.addActionListener(new MyAction());
+		chat.addActionListener(new MyAction());
 
 		// Add scroll to text area
 		history.setEditable(false);
@@ -95,6 +73,7 @@ public class Client extends JFrame {
 
 		// Set some of option for window
 		setSize(500, 300);
+		setResizable(false);
 		setTitle("   Client chat   ");
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -105,6 +84,38 @@ public class Client extends JFrame {
 
 		// Set text to text area with method
 		Server.setAreaText(history, client, "Server");
+
+	}
+
+	/**
+	 * Inner class which present the action listener for button and text field
+	 * 
+	 * @author Niddal.Salkic
+	 *
+	 */
+	public static class MyAction implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+
+			try {
+
+				BufferedWriter writer = new BufferedWriter(
+						new OutputStreamWriter(client.getOutputStream()));
+				writer.write(chat.getText());
+				writer.newLine();
+				writer.flush();
+
+				history.append("Client: " + chat.getText() + "\n");
+
+			} catch (IOException e1) {
+
+				e1.printStackTrace();
+			}
+
+			chat.setText("");
+
+		}
 
 	}
 

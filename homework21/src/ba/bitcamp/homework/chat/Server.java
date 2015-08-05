@@ -36,13 +36,13 @@ public class Server extends JFrame {
 
 	// Declaration new swing object for this window
 	private JPanel input = new JPanel(new FlowLayout(FlowLayout.TRAILING));
-	private JTextArea history = new JTextArea();
-	private JTextField chat = new JTextField();
 	private JButton send = new JButton("SEND");
+	private static JTextArea history = new JTextArea();
+	private static JTextField chat = new JTextField();
 
 	// Declaration new server and client
 	private ServerSocket server = null;
-	private Socket client = null;
+	private static Socket client;
 
 	public Server() throws IOException {
 
@@ -51,27 +51,8 @@ public class Server extends JFrame {
 
 		// Add action listener to send button
 		send.setSize(getMinimumSize());
-		send.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				try {
-
-					BufferedWriter writer = new BufferedWriter(
-							new OutputStreamWriter(client.getOutputStream()));
-					writer.write(chat.getText());
-					writer.newLine();
-					writer.flush();
-
-					history.append("Server: " + chat.getText() + "\n");
-
-				} catch (IOException e1) {
-
-					e1.printStackTrace();
-				}
-				chat.setText("");
-			}
-		});
+		send.addActionListener(new MyAction());
+		chat.addActionListener(new MyAction());
 
 		// Add scroll to text area
 		history.setEditable(false);
@@ -95,6 +76,10 @@ public class Server extends JFrame {
 		add(scroll, BorderLayout.CENTER);
 		add(input, BorderLayout.SOUTH);
 
+		// Set server to specified port
+		server = new ServerSocket(PORT);
+		client = server.accept();
+
 		// Set some of option for window
 		setSize(500, 300);
 		setResizable(false);
@@ -102,10 +87,6 @@ public class Server extends JFrame {
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setVisible(true);
-
-		// Set server to specified port
-		server = new ServerSocket(PORT);
-		client = server.accept();
 
 		// Set text to text area with method
 		setAreaText(history, client, "Client");
@@ -133,7 +114,37 @@ public class Server extends JFrame {
 			area.append(user + ": " + ChatUtility.function(text) + "\n");
 
 		}
+	}
 
+	/**
+	 * Inner class which present the action listener for button and text field
+	 * 
+	 * @author Niddal.Salkic
+	 *
+	 */
+	public static class MyAction implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+
+			try {
+
+				BufferedWriter writer = new BufferedWriter(
+						new OutputStreamWriter(client.getOutputStream()));
+				writer.write(chat.getText());
+				writer.newLine();
+				writer.flush();
+
+				history.append("Server: " + chat.getText() + "\n");
+
+			} catch (IOException e1) {
+
+				e1.printStackTrace();
+			}
+
+			chat.setText("");
+
+		}
 	}
 
 	public static void main(String[] args) {
