@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.concurrent.LinkedBlockingQueue;
+
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
@@ -35,6 +36,7 @@ public class ImageThread extends JFrame {
 			image = ImageIO.read(new File("picture.jpg"));
 		} catch (IOException e) {
 
+			System.out.println("Failed or interrupted I/O operations.");
 			e.printStackTrace();
 		}
 
@@ -72,6 +74,9 @@ public class ImageThread extends JFrame {
 				s.join();
 			} catch (InterruptedException e) {
 
+				System.out
+						.println("The thread is waiting, sleeping, or otherwise occupied, and the thread is interrupted, "
+								+ "either before or during the activity. ");
 				e.printStackTrace();
 			}
 			workers.add(s);
@@ -93,6 +98,9 @@ public class ImageThread extends JFrame {
 					Task job = tasks.take();
 					job.run();
 				} catch (InterruptedException e) {
+					System.out
+							.println("The thread is waiting, sleeping, or otherwise occupied, and the thread is interrupted, "
+									+ "either before or during the activity. ");
 					break;
 				}
 			}

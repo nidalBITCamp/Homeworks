@@ -69,6 +69,7 @@ public class FileThread {
 
 		} catch (IOException e) {
 			System.out.println("Something went wrong.... IOException");
+			e.printStackTrace();
 		}
 
 		System.out.println("Number of repetitions of first letter " + testing
@@ -88,7 +89,11 @@ public class FileThread {
 				try {
 					Task job = tasks.take();
 					job.run();
+
 				} catch (InterruptedException e) {
+					System.out
+							.println("The thread is waiting, sleeping, or otherwise occupied, and the thread is interrupted, "
+									+ "either before or during the activity. ");
 					break;
 				}
 			}
