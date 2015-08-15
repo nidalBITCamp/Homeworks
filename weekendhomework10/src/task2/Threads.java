@@ -13,29 +13,31 @@ public class Threads {
 	public static void main(String[] args) {
 
 		// Declaration first thread and starting them
-		MyThreads m1 = new MyThreads("First");
+		MyThreads m1 = new MyThreads(1);
 		Thread t1 = new Thread(m1);
 		t1.start();
-			try {
-				t1.join();
-			} catch (InterruptedException e) {
-				
-				e.printStackTrace();
-			}
+		try {
+			t1.join();
+		} catch (InterruptedException e) {
+			System.out
+					.println("The thread is waiting, sleeping, or otherwise occupied, and the thread is interrupted, either before or during the activity.");
+			e.printStackTrace();
+		}
 
 		// Declaration second thread and starting them
-		MyThreads m2 = new MyThreads("Second");
+		MyThreads m2 = new MyThreads(2);
 		Thread t2 = new Thread(m2);
 		t2.start();
-			try {
-				t2.join();
-			} catch (InterruptedException e) {
-				
-				e.printStackTrace();
-			}
-		
+		try {
+			t2.join();
+		} catch (InterruptedException e) {
+			System.out
+					.println("The thread is waiting, sleeping, or otherwise occupied, and the thread is interrupted, either before or during the activity.");
+			e.printStackTrace();
+		}
+
 		// Declaration third thread and starting them
-		MyThreads m3 = new MyThreads("Third");
+		MyThreads m3 = new MyThreads(3);
 		Thread t3 = new Thread(m3);
 		t3.start();
 
@@ -49,12 +51,12 @@ public class Threads {
 	 *
 	 */
 	static class MyThreads implements Runnable {
-		
-		private String name;
-		
-		public MyThreads(String name){
-			
-			this.name = name;
+
+		private Integer index;
+
+		public MyThreads(Integer index) {
+
+			this.index = index;
 		}
 
 		/**
@@ -62,23 +64,23 @@ public class Threads {
 		 */
 		@Override
 		public void run() {
-			
-			if ( name.equals("First")){
-			
+
+			if (index.equals(1)) {
+
 				for (int i = 1; i <= 10; i++) {
 					System.out.println(i);
 
 					try {
 						Thread.sleep(200);
 					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
+						System.out
+								.println("The thread is waiting, sleeping, or otherwise occupied, and the thread is interrupted, either before or during the activity.");
 						e.printStackTrace();
 					}
 				}
-				
-			}
-			else if ( name.equals("Second")){
-				
+
+			} else if (index.equals(2)) {
+
 				for (int i = 1; i < 5; i++) {
 
 					System.out.println("BitCamp");
@@ -89,23 +91,22 @@ public class Threads {
 						e.printStackTrace();
 					}
 				}
-				
-			}
-			else if ( name.equals("Third")){
-				
+
+			} else if (index.equals(3)) {
+
 				for (int i = 1; i <= 5; i++) {
 
 					System.out.println((int) (Math.random() * 5 + 1));
 					try {
 						Thread.sleep(700);
 					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
+						System.out
+								.println("The thread is waiting, sleeping, or otherwise occupied, and the thread is interrupted, either before or during the activity.");
 						e.printStackTrace();
 					}
 				}
 
-			}
-			else
+			} else
 				System.out.println("Wrong input");
 		}
 	}

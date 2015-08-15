@@ -35,11 +35,13 @@ public class HttpServer extends HttpUtility {
 					httpServer(httpclient, file);
 
 				} catch (NullPointerException e) {
+
+					System.out.println("Client is disconnected");
 					continue;
 				}
 			}
 		} catch (IOException e) {
-
+			System.out.println("Failed or interrupted I/O operations");
 			e.printStackTrace();
 		}
 	}

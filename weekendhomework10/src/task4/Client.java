@@ -29,7 +29,8 @@ public class Client {
 			writer.close();
 			client.close();
 		} catch (IOException e) {
-
+			
+			System.out.println("Failed or interrupted I/O operations");
 			e.printStackTrace();
 		}
 

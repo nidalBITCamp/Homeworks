@@ -19,6 +19,8 @@ import java.net.Socket;
 public class Server {
 
 	public static final int PORT = 1234;
+	public static final Integer FILE_EXISTS = 1;
+	public static final Integer UNKNOWN_FILE = 0;
 
 	public static void main(String[] args) {
 
@@ -38,18 +40,19 @@ public class Server {
 				line = reader.readLine();
 				System.out.println(line);
 
-				String test = isFileExist(line);
+				String fileStatus = isFileExist(line).toString();
 
 				BufferedWriter writer = new BufferedWriter(
 						new OutputStreamWriter(client.getOutputStream()));
 
-				writer.write(test);
+				writer.write(fileStatus);
 				writer.newLine();
 				writer.flush();
 
 			}
 		} catch (IOException e) {
 
+			System.out.println("Failed or interrupted I/O operations");
 			e.printStackTrace();
 		}
 
@@ -64,16 +67,17 @@ public class Server {
 	 * @return "1" if and only if the file or directory denoted by this abstract
 	 * pathname exists; "0" otherwise
 	 */
-	private static String isFileExist(String path) {
+	private static Integer isFileExist(String path) {
 
 		File file = new File(path);
 
-		if (file.exists()) {
+		
+		if (file.exists() && !file.isDirectory()) {
 
-			return "1";
+			return  FILE_EXISTS;
 		}
 
-		return "0";
+		return UNKNOWN_FILE;
 	}
 
 }

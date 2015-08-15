@@ -41,7 +41,8 @@ public class MyThread extends Thread {
 			try {
 				Thread.sleep(1000);
 			} catch (InterruptedException e) {
-
+				System.out
+						.println("The thread is waiting, sleeping, or otherwise occupied, and the thread is interrupted, either before or during the activity.");
 				e.printStackTrace();
 			}
 

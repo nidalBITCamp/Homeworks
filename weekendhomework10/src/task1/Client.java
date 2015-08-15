@@ -31,24 +31,25 @@ public class Client {
 			while (true) {
 				@SuppressWarnings("resource")
 				Scanner input = new Scanner(System.in);
-
 				System.out
-						.println("Please insert the path of checking file...");
+						.println("Please, insert a file path to check:");
+			   
 				writer.write(input.nextLine());
 				writer.newLine();
 				writer.flush();
 
 				BufferedReader reader = new BufferedReader(
 						new InputStreamReader(client.getInputStream()));
-				System.out.println("1 - file exist, 0 - file dont exist\n" + reader.readLine());
+				System.out.println("1 - file exist, 0 - file doesn't exist\n" + reader.readLine());
 
 			}
 
 		} catch (UnknownHostException e) {
-			// TODO Auto-generated catch block
+			System.out.println(" IP address of a host could not be determined");
 			e.printStackTrace();
+			
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			System.out.println("Failed or interrupted I/O operations");
 			e.printStackTrace();
 		}
 
