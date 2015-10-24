@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">AndroidApp</string>
+    <string name="edit_button">Edit</string>
+    <string name="delete_button">Delete</string>
+    <string name="addtext">Add a person</string>
+    <string name="person_name">First name</string>
+    <string name="person_surname">Last name</string>
+    <string name="add_person">Add</string>
+    <string name="edit_name">First name</string>
+    <string name="last_name">Last name</string>
+    <string name="succes">OK</string>
+</resources>
