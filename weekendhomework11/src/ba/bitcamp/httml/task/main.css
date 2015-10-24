@@ -1,0 +1,121 @@
+body {
+	background: url("http://lebar.in/wp-content/uploads/2014/11/Liverpool-Wallpaper-Windows-Seven.jpg") no-repeat center center fixed;
+
+-moz-background-size: cover;
+
+-webkit-background-size: cover;
+
+-o-background-size: cover;
+
+background-size: cover;
+
+}
+
+
+#nav_bar ul
+{
+margin: 0;
+padding: 0;
+list-style-type: none;
+text-align: center;
+}
+
+#nav_bar ul li { display: inline; }
+
+#nav_bar ul li a
+{
+text-decoration: none;
+padding: .2em 1em;
+color: #fff;
+background-color: #700000 ;
+}
+
+#nav_bar ul li a:hover
+{
+color: #fff;
+background-color: #700000 ;
+}
+
+footer {
+
+	text-align: center;
+	padding-top: 10%;
+	padding-bottom: 0;
+	color: #707070 ;
+	
+}
+
+.history p{
+
+margin-left: 60px;
+
+}
+
+#text_color{
+
+color: #D6D6C2
+
+}
+
+
+}
+
+table, ul, li {
+
+    border: 3px solid #D6D6C2;
+    margin-left: 70px;
+    margin-right: 70px;
+    color: orange;
+    font-size: 14;
+    font-family: monospace;
+
+
+}
+
+
+#pictures{
+
+	width: 150px;
+	height: 150px;
+	display: inline;
+}
+
+
+#video{
+
+
+	margin-left: 60px;
+	border: 5px solid #D6D6C2 ;
+}
+
+#title_color{
+
+	color: blue;
+	text-align: center;
+
+}
+
+.about  {
+
+
+	margin-left: 60px;
+	margin-right: 150px;
+	border: 2px solid #D6D6C2;
+	font-family: inherit;
+	overflow-y: scroll;
+	height: 250px;
+	width: 700px;
+ 
+}
+
+.tabel tr ,td{
+
+	width:40%;
+	border: 2px solid orange;
+	margin-right: 60px;
+	color: #D6D6C2;
+
+
+}
+
+	
